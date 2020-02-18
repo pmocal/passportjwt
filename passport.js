@@ -2,7 +2,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require('passport-jwt');
 const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJWT;
+const ExtractJWT = passportJWT.ExtractJwt;
+const UserModel = require('./models/user');
 
 passport.use(
 	new LocalStrategy(
@@ -14,11 +15,13 @@ passport.use(
 			return UserModel.findOne({email, password})
 				.then(user => {
 					if (!user) {
-						return cb(null, user, { message: 'Incorrect email or password.' });
+						return cb(null, false, { message: 'Incorrect email or password.' });
 					}
 					return cb(null, user, {message: 'Logged In Successfully'});
 				})
-				.catch(err => cb(err));
+				.catch(err => {
+					cb(err)
+				});
 	}
 ));
 

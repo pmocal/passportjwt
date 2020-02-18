@@ -8,22 +8,26 @@ router.post('/login', function (req, res, next) {
 		(err, user, info) => {
 			if (err || !user) {
 				return res.status(400).json({
-					message: 'Something is not right',
+					message: err,
 					user : user
 				})
 			}
 
 			req.login(user, {session: false}, (err) => {
+
 				if (err) {
-					res.send(err);
+					next(err);
 				}
 
-				//generate signed json web token with
+				// generate signed json web token with
 				// contents of user object and
 				// return it in the response
 
-				const token = jwt.sign(user, 'your_jwt_secret');
+				const token = jwt.sign(user.toJSON(), 'your_jwt_secret');
 				return res.json({ user, token });
 			});
-		})(req, res);
+		}
+	)(req, res);
 });
+
+module.exports = router;
