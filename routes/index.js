@@ -19,4 +19,10 @@ router.post('/signup', function (req, res) {
 	res.redirect('/');
 });
 
+router.get('/cookies', function (req, res) {
+	console.log(req.cookies.token);
+	console.log(req.cookies);
+	res.send(req.cookies.token);
+});
+
 module.exports = router;
