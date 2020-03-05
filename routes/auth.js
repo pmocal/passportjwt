@@ -6,7 +6,6 @@ const passport = require('passport');
 router.post('/login', function (req, res, next) {
 	passport.authenticate('local', {session: false},
 		(err, user, info) => {
-			console.log(user);
 			if (err || !user) {
 				return res.status(400).json({
 					message: err,
@@ -26,7 +25,9 @@ router.post('/login', function (req, res, next) {
 				// return it in the response
 
 				const token = jwt.sign(user.toJSON(), 'your_jwt_secret');
-				res.cookie('token', token, { httpOnly: true, secure: true })
+				res.cookie('token', token);
+				console.log(token);
+				console.log(user.toJSON());
 				res.status(200).send({ user, token });
 			});
 		}
