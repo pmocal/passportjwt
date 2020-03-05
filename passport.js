@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require('passport-jwt');
 const JWTStrategy = passportJWT.Strategy;
 const UserModel = require('./models/user');
+var mongoose = require('mongoose');
 
 passport.use(
 	new LocalStrategy(
@@ -31,13 +32,16 @@ opts.jwtFromRequest = function(req) {
     {
         token = req.cookies['token'];
     }
+    
     return token;
 };
 opts.secretOrKey = 'your_jwt_secret';
 
 passport.use(new JWTStrategy(opts, function (jwt_payload, done) {
+	console.log("token");
+	console.log(mongoose.Types.ObjectId(jwt_payload._id));
 	try {
-		UserModel.findOne({id: jwt_payload.sub}, function(err, user) {
+		UserModel.findOne({_id: jwt_payload._id}, function(err, user) {
 			if (err) {
 				done(err, false);
 			}
