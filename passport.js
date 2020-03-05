@@ -38,8 +38,6 @@ opts.jwtFromRequest = function(req) {
 opts.secretOrKey = 'your_jwt_secret';
 
 passport.use(new JWTStrategy(opts, function (jwt_payload, done) {
-	console.log("token");
-	console.log(mongoose.Types.ObjectId(jwt_payload._id));
 	try {
 		UserModel.findOne({_id: jwt_payload._id}, function(err, user) {
 			if (err) {
