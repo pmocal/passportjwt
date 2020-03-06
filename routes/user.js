@@ -1,12 +1,8 @@
 const express = require('express'); //is this line required?
 const router = express.Router();
 
-router.get('/', function(req, res, next){
-	res.send('respond with a resource');
-});
-
 router.get('/profile', function(req, res, next) {
-	res.send(req.user);
+	res.render('profile', {req: req});
 });
 
 module.exports = router;

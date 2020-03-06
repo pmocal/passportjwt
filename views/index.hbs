@@ -1,16 +1,25 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="/styles.css" />
 	</head>
 	<body>
+		<h1>JWT Demo</h1>
+		<p>Enter credentials or sign up.</p>
 		<form action="/auth/login" method="POST">
-			<label for="email">Email</label>
-			<input name="email"/>
-			<label for="password">Password</label>
-			<input name="password" type="password"/>
-			<input type="submit" />
+			<div>
+				<label for="email">Email: </label>
+				<input name="email"/>
+			</div>
+			<div>
+				<label for="password">Password: </label>
+				<input name="password" type="password"/>
+			</div>
+			<div>
+				<input type="submit" />
+				<a href="/signup">Sign up</a>
+			</div>
 		</form>
 
-		<a href="/signup">Sign up</a>
+		
 	</body>
 </html>

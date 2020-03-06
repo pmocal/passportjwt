@@ -6,6 +6,11 @@ router.get('/', function (req, res) {
 	res.render('index');
 });
 
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 router.get('/signup', function (req, res) {
 	res.render('sign_up');
 });
