@@ -1,3 +1,3 @@
 # passportjwt
 
-![screenshot](screenshot.png)
+![screenshot](screenshot1.png)
